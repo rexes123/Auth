@@ -9,8 +9,9 @@ import { db } from './firebase';
     // getFirestore//
 // } from 'firebase/firestore'
 import{
-    getAuth,
-    // createJumpstarterWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  getAuth,
+    // createJumpstarterWithEmailAndPassword,
 
 }from 'firebase/auth'
 import { getAllJSDocTags } from "typescript";
@@ -46,11 +47,15 @@ if (docSnap.exists()) {
     console.log("Document data:", docSnap.data());
 let currentdata = docSnap.data()
 console.log(currentdata.elements[1])
+console.log(currentdata.elements[2])
 let elements = ["cats", "dogs", "mouse"]
-console.log(elements[2])
+console.log(elements[1])
 let components = currentdata.components
-console.log(components.name)
-
+console.log(components.color)
+let items = ["Pencil", "Pen", "Book"]
+console.log(items[1])
+let names = ["Clifford","Jing Yong","Jun Hao"]
+console.log(names[0])
 }
 //     await updateDoc(docRef, {
 //         red_score:updatedScore
@@ -63,5 +68,24 @@ console.log(components.name)
     
 
   }
+  // signing users up
+s  signupForm.addEventListener('submit', (e)=>{
+    e.preventDefault()
+
+    const email = signupForm.email.value
+    const password = signupForm.password.value
+
+    createUserWithEmailAndPassword(auth, email, password)
+
+       .then((cred) =>{
+         console.log('user created:', cred.user)
+         signupForm.rest()
+       })
+
+       .catch((err) => {
+        console.log(err.message)
+       })
+  }
+  )
 
   readData()
